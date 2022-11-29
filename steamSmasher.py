@@ -22,30 +22,27 @@ def stopDownloads(path):
             f.close
 
 
-stopDownloads(os.path.dirname(os.path.realpath(__file__)))
+#stopDownloads(os.path.dirname(os.path.realpath(__file__)))
     
 f = open("libraryfolders.vdf", "r")
 libraryfile = f.readlines()
 
 for line in libraryfile:
-    line = line.replace(" ","")
-    line = line.replace("   ","")
-    line = line.replace('"',"")
     
-    if(len(line) > 4):
 
-        if(line[4].isupper()):
-            print("Found library on drive: " + line[4])
-
+        if '"path"' in line:
+            print("Found path")
+            
+            print(line)
             librarypath = ""
 
-            i = 4
-            while(not line[i].isspace()):
+            i = 11
+            while(line[i] != '"'):
                 
                 librarypath += line[i]
                 i += 1
             librarypath = librarypath + "\steamapps"
-            #print(librarypath)
+            print(librarypath)
             stopDownloads(librarypath)
 
 
